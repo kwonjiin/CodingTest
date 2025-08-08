@@ -1,25 +1,33 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main{
+    public static void main(String[] args) throws IOException {
+ //       첫째 줄에 입력으로 주어진 N개의 정수 중에 v가 몇 개인지 출력한다.
 
-        Scanner sc = new Scanner(System.in);
-
-        int a = 0;
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-
-        for(int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+//예제 입력 1 
+//11
+//1 4 1 2 4 2 4 2 3 4 4
+//2
         
-        int v = sc.nextInt();				 
-
-        for(int j = 0; j < arr.length; j++){
-            if(v == arr[j]){
-                a++;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[N];
+        
+        int count = 0;
+        
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        int v = Integer.parseInt(br.readLine());
+        
+        for(int i = 0; i < N; i++){
+            if (arr[i] == v){
+                count ++;
             }
         }
-        System.out.println(a);
+        System.out.println(count);
     }
 }
