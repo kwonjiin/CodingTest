@@ -1,26 +1,30 @@
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
 public class Main{
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int sum = 0;
         
-        String[] str = br.readLine().split(" ");
-        Double[] arr = new Double[N];
-            
-        for (int i = 0; i< N; i++){
-            arr[i] = Double.parseDouble(str[i]);
-        }
+        int n = Integer.parseInt(br.readLine());
+        float[] arr = new float[n];
         
-        for(int i = 0; i < N; i++){
-            sum += arr[i];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < n; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
         }
         
         Arrays.sort(arr);
-        System.out.println(sum / arr[N-1] * 100 / N);
+        
+        for(int i = 0; i < n; i++){
+            arr[i] = (arr[i] / arr[n-1]) * 100;
+        }
+        
+        float sum = 0;
+        
+        for(int i = 0; i < n; i++){
+            sum += arr[i];
+        }
+        
+        System.out.println(sum / n);
     }
 }
