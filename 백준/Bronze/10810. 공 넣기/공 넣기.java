@@ -1,30 +1,30 @@
 import java.io.*;
 import java.util.*;
 
-public class Main{
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        
-        int[] bucket = new int[n + 1];
-        
-        for(int i = 0; i < m; i++){
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] basket = new int[N + 1];
+
+        for (int m = 0; m < M; m++) {
             st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            int num = Integer.parseInt(st.nextToken());
-            
-            for(int idx = start; idx <= end; idx++){
-                bucket[idx] = num;
-            }
+            int i = Integer.parseInt(st.nextToken());
+            int j = Integer.parseInt(st.nextToken());
+            int k = Integer.parseInt(st.nextToken());
+
+            // Arrays.fill을 사용해 i~j까지 한 번에 채움
+            Arrays.fill(basket, i, j + 1, k);
         }
+
         StringBuilder sb = new StringBuilder();
-        for(int idx = 1; idx <= n; idx++){
-            sb.append(bucket[idx]).append(" ");
+        for (int idx = 1; idx <= N; idx++) {
+            sb.append(basket[idx]).append(" ");
         }
-        System.out.println(sb);
+        System.out.print(sb.toString().trim());
     }
 }
