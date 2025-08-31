@@ -5,8 +5,7 @@ public class Main {
     static int N;
     static int[][] map;
     static boolean[][] visited;
-    static int count;
-    static int[] dx = {-1, 1, 0, 0}; // 상하좌우
+    static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws IOException {
@@ -26,9 +25,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (map[i][j] == 1 && !visited[i][j]) {
-                    count = 0;
-                    dfs(i, j);
-                    result.add(count);
+                    result.add(bfs(i, j));
                 }
             }
         }
@@ -38,19 +35,27 @@ public class Main {
         for (int num : result) System.out.println(num);
     }
 
-    static void dfs(int x, int y) {
+    static int bfs(int x, int y) {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{x, y});
         visited[x][y] = true;
-        count++;
+        int count = 1;
 
-        for (int d = 0; d < 4; d++) {
-            int nx = x + dx[d];
-            int ny = y + dy[d];
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            for (int d = 0; d < 4; d++) {
+                int nx = cur[0] + dx[d];
+                int ny = cur[1] + dy[d];
 
-            if (nx >= 0 && ny >= 0 && nx < N && ny < N) {
-                if (map[nx][ny] == 1 && !visited[nx][ny]) {
-                    dfs(nx, ny);
+                if (nx >= 0 && ny >= 0 && nx < N && ny < N) {
+                    if (map[nx][ny] == 1 && !visited[nx][ny]) {
+                        visited[nx][ny] = true;
+                        q.add(new int[]{nx, ny});
+                        count++;
+                    }
                 }
             }
         }
+        return count;
     }
 }
