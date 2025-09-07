@@ -10,7 +10,7 @@ public class Main {
             String line = br.readLine();
             if (line.equals(".")) break; // 종료 조건
             
-            Stack<Character> stack = new Stack<>();
+            Deque<Character> stack = new ArrayDeque<>();
             boolean isBalanced = true;
             
             for (char ch : line.toCharArray()) {
