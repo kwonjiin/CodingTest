@@ -1,31 +1,39 @@
 import java.io.*;
 
 public class Main {
-    static int[] stair, dp;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        stair = new int[N + 1];
-        dp = new int[N + 1];
-
+        int[] stair = new int[N + 1];
         for (int i = 1; i <= N; i++) {
             stair[i] = Integer.parseInt(br.readLine());
-            dp[i] = -1;
         }
 
-        System.out.println(solve(N));
-    }
+        if (N == 1) {
+            System.out.println(stair[1]);
+            return;
+        } else if (N == 2) {
+            System.out.println(stair[1] + stair[2]);
+            return;
+        }
 
-    static int solve(int n) {
-        if (n == 1) return stair[1];
-        if (n == 2) return stair[1] + stair[2];
-        if (n == 3) return Math.max(stair[1] + stair[3], stair[2] + stair[3]);
+        int prev3 = stair[1];
+        int prev2 = stair[1] + stair[2];
+        int prev1 = Math.max(stair[1] + stair[3], stair[2] + stair[3]);
 
-        if (dp[n] != -1) return dp[n];
+        if (N == 3) {
+            System.out.println(prev1);
+            return;
+        }
 
-        dp[n] = Math.max(solve(n - 2) + stair[n], solve(n - 3) + stair[n - 1] + stair[n]);
-        return dp[n];
+        for (int i = 4; i <= N; i++) {
+            int current = Math.max(prev2 + stair[i], prev3 + stair[i - 1] + stair[i]);
+            prev3 = prev2;
+            prev2 = prev1;
+            prev1 = current;
+        }
+
+        System.out.println(prev1);
     }
 }
