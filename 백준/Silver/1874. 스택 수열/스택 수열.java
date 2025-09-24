@@ -6,7 +6,8 @@ public class Main {
         int[] arr = new int[n];
         for(int i=0;i<n;i++) arr[i]=sc.nextInt();
         
-        Stack<Integer> stack = new Stack<>();
+        int[] stack = new int[n];
+        int top = -1;
         StringBuilder sb = new StringBuilder();
         int num = 1;
         boolean possible = true;
@@ -15,12 +16,12 @@ public class Main {
             int target = arr[i];
             
             while(num <= target){
-                stack.push(num++);
+                stack[++top] = num++;
                 sb.append("+\n");
             }
             
-            if(stack.peek() == target){
-                stack.pop();
+            if(stack[top] == target){
+                top--;
                 sb.append("-\n");
             } else {
                 possible = false;
